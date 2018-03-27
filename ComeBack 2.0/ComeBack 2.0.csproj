@@ -66,6 +66,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="addprogress.aspx" />
     <Content Include="assets\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\fonts\fontawesome-webfont.woff" />
@@ -74,6 +75,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <None Include="packages.config" />
+    <Content Include="ShowPicture.aspx" />
     <Content Include="Site1.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -120,6 +122,13 @@
     <Compile Include="AddLog.aspx.designer.cs">
       <DependentUpon>AddLog.aspx</DependentUpon>
     </Compile>
+    <Compile Include="addprogress.aspx.cs">
+      <DependentUpon>addprogress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="addprogress.aspx.designer.cs">
+      <DependentUpon>addprogress.aspx</DependentUpon>
+    </Compile>
     <Compile Include="home.aspx.cs">
       <DependentUpon>home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -142,6 +151,10 @@
       <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowPicture.aspx.cs">
+      <DependentUpon>ShowPicture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Site1.Master.cs">
       <DependentUpon>Site1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

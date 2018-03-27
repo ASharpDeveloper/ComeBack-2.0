@@ -375,6 +375,52 @@ public class Utils
         return Items;
     }
 
+    public void UploadFile(byte[] fileData, int size, string name, string contentType)
+    {
+        OpenDBConnection();
+
+        SqlCommand ucommand;
+
+        ucommand = new SqlCommand("INSERT INTO cb_image (fld_file, fld_size, fld_filename, fld_contenttype"
+                                + " )"
+                                + " VALUES(@File, @Size, @FileName, @ContentType"
+                                + ");", conn);
+
+        ucommand.Parameters.Add(new SqlParameter("File", fileData));
+        ucommand.Parameters.Add(new SqlParameter("Size", size));
+        ucommand.Parameters.Add(new SqlParameter("FileName", name));
+        ucommand.Parameters.Add(new SqlParameter("ContentType", contentType));
+
+        ucommand.ExecuteNonQuery();
+    }
+
+    public List<imageitem> Get4Image(string fld_user)
+    {
+        List<imageitem> Items2 = new List<imageitem>();
+
+        OpenDBConnection();
+
+        SqlCommand ucommand;
+
+        ucommand = new SqlCommand("SELECT TOP 4 * FROM cb_progressimage where fld_user = @user", conn);
+
+        ucommand.Parameters.Add(new SqlParameter("user", fld_user));
+
+        using (SqlDataReader reader = ucommand.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                imageitem Item = new imageitem();
+
+                Item.fld_filename = reader["fld_filename"].ToString();
+                Items2.Add(Item);
+            }
+
+        }
+        return Items2;
+    }
+
+
     public void AddLog(string fld_user, string fld_exercise1, string fld_exercise2, string fld_exercise3, string fld_exercise4, string fld_exercise5, string fld_rating, string fld_session, string fld_weight)
     {
 
@@ -676,6 +722,73 @@ public class Utils
         CloseDBConnection();
 
         return Items2;
+    }
+
+    public void AddProgress(string fld_filename, string fld_user)
+    {
+        OpenDBConnection();
+
+        SqlCommand ucommand;
+
+        ucommand = new SqlCommand("INSERT INTO cb_progressimage (fld_filename, fld_user) values (@fld_filename, @user)", conn);
+
+
+
+
+        ucommand.Parameters.Add(new SqlParameter("fld_filename", fld_filename));
+        ucommand.Parameters.Add(new SqlParameter("user", fld_user));
+
+        ucommand.ExecuteNonQuery();
+
+    }
+
+    public void ProcessShowPictureFromDB(string fld_filename, HttpResponse Response)
+    {
+        for (int n = 1; n <= 10; n++)
+        {
+            try
+            {
+                OpenDBConnection();
+
+                string strsql = "SELECT TOP 1 fld_autoinc, fld_file, fld_contenttype FROM cb_image WHERE fld_filename = @fld_filename ORDER BY fld_autoinc DESC;";
+
+                SqlCommand command = new SqlCommand(strsql, conn);
+                command.Parameters.Add(new SqlParameter("fld_filename", fld_filename));
+
+                string base64String = "";
+                string contentType = "";
+                byte[] bytes = null;
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        bytes = (byte[])reader["fld_file"];
+                        base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        contentType = reader["fld_contenttype"].ToString();
+
+                    }
+                }
+
+                command.Dispose();
+                CloseDBConnection();
+
+                if (base64String != "")
+                {
+                    Response.ContentType = contentType;
+                    Response.AddHeader("Content-type", contentType);
+                    Response.BinaryWrite(bytes);
+                    Response.Flush();
+                    Response.End();
+                }
+
+                break;
+            }
+            catch
+            {
+                // do nothing, retry next loop
+            }
+        }
     }
 
     public List<imageitem> GetGroupImage(string group)
@@ -1033,14 +1146,15 @@ public class Utils
         public string fld_sunday { get; set; }
     }
 
-    
-
     public class imageitem
     {
 
         public string fld_filename { get; set; }
 
     }
+
+
+    
 
 
     public class referral

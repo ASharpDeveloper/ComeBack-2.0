@@ -30,5 +30,10 @@ namespace ComeBack_2._0
             Util.AddLog(Session["username"].ToString(), exercise1.Text.Trim(), exercise2.Text.Trim(), exercise3.Text.Trim(), exercise4.Text.Trim(), exercise5.Text.Trim(), DropDownRating.SelectedItem.ToString(), txtsession.Text.Trim(), txtweight.Text.Trim());
             Response.Redirect("WorkoutPlanner.aspx");
         }
+
+        protected void btnSubmit_Click1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

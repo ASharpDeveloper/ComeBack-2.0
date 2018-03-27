@@ -32,7 +32,34 @@ namespace ComeBack_2._0
                 html += "</div>";
             }
             LitLog.Text = html;
+
+
+            string html2 = "";
+
+            List<Utils.imageitem> items2 = util.Get4Image(Session["username"].ToString());
             
+            foreach (var item in items2)
+            {
+                html2 += "<div class=\"item active\">";
+                html2 += "<img src=\"ShowPicture.aspx?filename=s" + item.fld_filename + "/>";
+                html2 += "</div>";
+
+            }
+
+            
+            Utils Util = new Utils();
+            List<Utils.ScheduleItem> items3 = util.GetSchedule(Session["username"].ToString());
+            foreach (var item in items3)
+            {
+                lblmonday.Text = item.fld_monday;
+                lbltuesday.Text = item.fld_tuesday;
+                lblwednesday.Text = item.fld_wednesday;
+                lblthursday.Text = item.fld_thursday;
+                lblfriday.Text = item.fld_friday;
+                lblsaturday.Text = item.fld_saturday;
+                lblsunday.Text = item.fld_sunday;
+                lblmonth.Text = item.fld_CurrentMonth.ToString();
+            }
         }
     }
 }
