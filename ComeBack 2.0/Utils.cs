@@ -335,6 +335,7 @@ public class Utils
                 item.rating = reader["fld_rating"].ToString();
                 item.session = reader["fld_session"].ToString();
                 item.weight = reader["fld_weight"].ToString();
+                item.LogID = Convert.ToInt32(reader["fld_logid"].ToString());
                 Items.Add(item);
             }
 
@@ -1121,7 +1122,7 @@ public class Utils
         public string fld_text { get; set; }
         public string fld_settings_time { get; set; }
         public string groups { get; set; }
-        public int productID { get; set; }
+        public int LogID { get; set; }
         public string session { get; set; }
         public string exercise1 { get; set; }
         public string exercise2 { get; set; }

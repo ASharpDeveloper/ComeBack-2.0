@@ -75,6 +75,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
     <None Include="packages.config" />
+    <Content Include="Logs.aspx" />
     <Content Include="ShowPicture.aspx" />
     <Content Include="Site1.Master" />
     <None Include="Web.Debug.config">
@@ -149,6 +150,13 @@
     </Compile>
     <Compile Include="logout.aspx.designer.cs">
       <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logs.aspx.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logs.aspx.designer.cs">
+      <DependentUpon>Logs.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowPicture.aspx.cs">

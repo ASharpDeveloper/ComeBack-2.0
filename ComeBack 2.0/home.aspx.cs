@@ -23,9 +23,10 @@ namespace ComeBack_2._0
 
             foreach (var item in items)
             {
+
                 html += "<div class=\"col-md-3 col-sm-3 col-xs-6\">";
                 html += "<div class=\"alert alert-info back-widget-set text-center\">";
-                html += "<i class=\"fa fa-history fa-5x\"></i>";
+                html += "<a href=\"logs.aspx?id=" + item.LogID.ToString() + "< i class=\"fa fa-history fa-5x\"></i>";
                 html += "<h3> " + item.weight.ToString() + " KG &nbsp; <i class=\"\"></i></h3>";
                 html += item.date.ToString();
                 html += "</div>";
